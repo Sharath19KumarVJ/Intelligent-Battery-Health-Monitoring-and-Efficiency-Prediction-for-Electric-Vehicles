@@ -1,0 +1,106 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Background with AI-themed image */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://images.unsplash.com/photo-1581091012184-5c1f9760e3c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass Effect Container */
+.container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 500px;
+    color: #fff;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #f0f0f0;
+}
+
+input[type="number"],
+input[type="text"] {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+input::placeholder {
+    color: #ddd;
+}
+
+/* Button Styling */
+button {
+    padding: 14px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(to right, #ff512f, #dd2476);
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(255, 81, 47, 0.4);
+}
+
+/* Result Box */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(0, 128, 0, 0.2);
+    border: 1px solid #8fbc8f;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Responsive Text Inputs */
+@media (max-width: 500px) {
+    input, button {
+        font-size: 14px;
+    }
+}

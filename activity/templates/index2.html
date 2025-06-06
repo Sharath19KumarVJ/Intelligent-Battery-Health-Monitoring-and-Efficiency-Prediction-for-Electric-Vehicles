@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EV Battery Efficiency Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fafafa;
+            min-height: 100vh;
+        }
+
+        /* Top Task Bar (like Instagram) */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 14px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #262626;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            background-color: #fff;
+            margin: 40px auto;
+            padding: 40px 30px;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #262626;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #fafafa;
+        }
+
+        input[type="submit"] {
+            padding: 14px;
+            background: #0095f6;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #007cd1;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .result.success {
+            background-color: #d0f0ff;
+            color: #004085;
+            border: 1px solid #b8daff;
+        }
+
+        .result.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                margin: 20px;
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">🔋 EV Battery Efficiency Predictor</div>
+
+    <div class="container">
+        <h2>Enter Battery Parameters</h2>
+        <form method="POST">
+            <label for="voltage">Voltage (V):</label>
+            <input type="text" id="voltage" name="voltage" placeholder="e.g. 400" required>
+
+            <label for="current">Current (A):</label>
+            <input type="text" id="current" name="current" placeholder="e.g. 50" required>
+
+            <label for="temperature">Temperature (°C):</label>
+            <input type="text" id="temperature" name="temperature" placeholder="e.g. 25" required>
+
+            <label for="soc">State of Charge (%):</label>
+            <input type="text" id="soc" name="soc" placeholder="e.g. 80" required>
+
+            <label for="cycles">Cycle Count:</label>
+            <input type="text" id="cycles" name="cycles" placeholder="e.g. 300" required>
+
+            <label for="capacity">Remaining Capacity (Ah):</label>
+            <input type="text" id="capacity" name="capacity" placeholder="e.g. 45" required>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if error %}
+        <div class="result error">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+
+        {% if prediction is not none %}
+        <div class="result success">
+            <strong>Predicted Battery Efficiency:</strong> {{ prediction }}
+        </div>
+        {% endif %}
+        {% if mse_scores %}
+    <div class="result success">
+        <strong>Model Mean Squared Errors (MSE):</strong><br>
+        <ul style="list-style: none; padding-left: 0;">
+        {% for model, mse in mse_scores.items() %}
+            <li><b>{{ model }}:</b> {{ mse }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    </div>
+
+</body>
+</html>
